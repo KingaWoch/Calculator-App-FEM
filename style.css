@@ -29,6 +29,11 @@ body {
   height: 100%;
 }
 
+button,
+input {
+  cursor: pointer;
+}
+
 body {
   display: grid;
   place-items: center;
@@ -46,26 +51,55 @@ header {
   margin-bottom: 1rem;
 }
 
-.input-field {
-  width: 100px;
+.theme-field {
+  width: 135px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-self: end;
+  gap: 1.5rem;
 }
 
-#theme-number {
-  grid-column: 2/3;
+#theme {
+  align-self: end;
+  font-size: 0.8rem;
+  text-align: right;
 }
 
-.input-field input {
-  width: 40px;
+.themes {
+  display: grid;
+  gap: 0.2rem;
 }
 
-input[type="range"]::-ms-track {
-  cursor: pointer;
+.theme-labels {
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.8rem;
 }
 
-.screen input {
+.buttons-bg {
+  background-color: var(--toggle-keypad-bg-1);
+  border-radius: 1rem;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 0.2rem;
+}
+
+.buttons-bg button {
+  width: 12px;
+  height: 12px;
+  background-color: var(--toggle-result-bg-1);
+  border: none;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.buttons-bg button.active {
+  opacity: 1;
+}
+
+#result {
   width: 100%;
   padding: 1rem;
   font-size: var(--fs);
@@ -75,6 +109,15 @@ input[type="range"]::-ms-track {
   color: var(--text-white-1);
   margin-bottom: 1rem;
   border-radius: 0.5rem;
+}
+
+.screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  margin: -1px;
 }
 
 input::-webkit-inner-spin-button {
@@ -94,7 +137,6 @@ input::-webkit-inner-spin-button {
   padding-block: 0.5rem;
   border: none;
   font-size: var(--fs);
-
   border-radius: 0.5rem;
 }
 
