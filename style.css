@@ -80,7 +80,8 @@ body.active-3 {
 }
 
 section {
-  width: 400px;
+  margin-inline: 1rem;
+  max-width: 400px;
 }
 
 header {
