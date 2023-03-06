@@ -1,53 +1,115 @@
-const result = document.getElementById("result");
-const numbers = document.querySelectorAll(".number");
-const operators = document.querySelectorAll(".operator");
-const deleteButton = document.querySelector(".delete");
-const reset = document.querySelector(".reset");
-const equals = document.querySelector(".equals");
+window.onload = function () {
+  console.log("start");
+  calculator.init();
+};
 
-// result.addEventListener("input", () => {
-//   result.innerText = number.innerText;
-//   displayNumbers();
-// });
+let calculator = {
+  buttons: undefined,
+  result: undefined,
 
-// function displayNumbers(event) {
-//   numbers.forEach((number) => {
-//     if (event.target.innerHTML == number.innerHTML) {
-//       result.innerText = number.innerText;
-//     }
-//   });
-//   console.log(result);
-// }
+  init: function () {
+    this.buttons = document.querySelectorAll(".keypad button");
+    this.result = document.getElementById("result");
+    for (let i = 0; i < this.buttons.length; i++) {
+      let button = this.buttons[i];
+      button.addEventListener("click", this.buttonClick);
+    }
+  },
 
-// function deleteLastNumber() {}
+  buttonClick: function (e) {
+    let inputText = e.target.innerHTML;
+    // console.log("clicked: " + inputText);
 
-// function clearScreen() {}
+    switch (inputText) {
+      case "0":
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+      case ".":
+      case "/":
+      case "*":
+      case "-":
+      case "+":
+        calculator.addToInput(inputText);
+        break;
+      case "=":
+        calculator.evaluate();
+        break;
+      case "DEL":
+        calculator.delete();
+        break;
+      case "RESET":
+        calculator.reset();
+    }
+  },
 
-// function showResult() {}
+  addToInput: function (str) {
+    if (this.result.value === "." && str === ".") return;
+    else {
+      this.result.value += str;
+    }
+  },
 
-// Listening
+  evaluate: function () {
+    if (calculator.result.value === "") return;
+    let equals = eval(calculator.result.value);
+    calculator.setInput(equals);
+  },
 
-// numbers.forEach((number) => {
-//   number.addEventListener("click", displayNumbers);
-// });
+  delete: function () {
+    calculator.result.value = calculator.result.value.toString().slice(0, -1);
+  },
 
-// deleteButton.addEventListener("click", deleteLastNumber);
+  reset: function () {
+    calculator.result.value = "";
+  },
 
-// reset.addEventListener("click", clearScreen);
-
-// equals.addEventListener("click", showResult);
+  setInput: function (str) {
+    calculator.result.value = str;
+  },
+};
 
 // themes
 
-const buttons = document.querySelectorAll(".theme-btn");
+const themeButtons = document.querySelectorAll(".theme-btn");
+const body = document.querySelector("body");
+const firstTheme = document.querySelector(".theme-1");
+const secondTheme = document.querySelector(".theme-2");
+const thirdTheme = document.querySelector(".theme-3");
 
-buttons.forEach((button) =>
+themeButtons.forEach((button) =>
   button.addEventListener("click", () => {
     if (button.classList.contains("active")) {
       button.classList.toggle("active");
     } else {
-      buttons.forEach((button) => button.classList.remove("active"));
+      themeButtons.forEach((button) => button.classList.remove("active"));
       button.classList.add("active");
+    }
+    if (button.classList.contains("active")) {
     }
   })
 );
+
+firstTheme.addEventListener("click", () => {
+  body.classList.add("active-1");
+  body.classList.remove("active-2");
+  body.classList.remove("active-3");
+});
+
+secondTheme.addEventListener("click", () => {
+  body.classList.add("active-2");
+  body.classList.remove("active-1");
+  body.classList.remove("active-3");
+});
+
+thirdTheme.addEventListener("click", () => {
+  body.classList.add("active-3");
+  body.classList.remove("active-1");
+  body.classList.remove("active-2");
+});
