@@ -1,5 +1,5 @@
 window.onload = function () {
-  console.log("start");
+  //console.log("start");
   calculator.init();
 };
 
@@ -83,33 +83,44 @@ const firstTheme = document.querySelector(".theme-1");
 const secondTheme = document.querySelector(".theme-2");
 const thirdTheme = document.querySelector(".theme-3");
 
-themeButtons.forEach((button) =>
-  button.addEventListener("click", () => {
-    if (button.classList.contains("active")) {
-      button.classList.toggle("active");
-    } else {
-      themeButtons.forEach((button) => button.classList.remove("active"));
-      button.classList.add("active");
-    }
-    if (button.classList.contains("active")) {
-    }
-  })
-);
+let theme = localStorage.getItem("theme") || "active-1";
 
 firstTheme.addEventListener("click", () => {
   body.classList.add("active-1");
   body.classList.remove("active-2");
   body.classList.remove("active-3");
+  theme = "active-1";
+  localStorage.setItem("theme", theme);
 });
 
 secondTheme.addEventListener("click", () => {
   body.classList.add("active-2");
   body.classList.remove("active-1");
   body.classList.remove("active-3");
+  theme = "active-2";
+  localStorage.setItem("theme", theme);
 });
 
 thirdTheme.addEventListener("click", () => {
   body.classList.add("active-3");
   body.classList.remove("active-1");
   body.classList.remove("active-2");
+  theme = "active-3";
+  localStorage.setItem("theme", theme);
 });
+
+if (theme === "active-1") {
+  body.classList.add("active-1");
+  body.classList.remove("active-2");
+  body.classList.remove("active-3");
+}
+if (theme === "active-2") {
+  body.classList.add("active-2");
+  body.classList.remove("active-1");
+  body.classList.remove("active-3");
+}
+if (theme === "active-3") {
+  body.classList.add("active-3");
+  body.classList.remove("active-1");
+  body.classList.remove("active-2");
+}

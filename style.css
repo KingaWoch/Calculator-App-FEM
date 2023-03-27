@@ -176,9 +176,21 @@ body.active-3 .buttons-bg button {
   background-color: var(--toggle-result-bg-3);
 }
 
-.buttons-bg button.active {
+body.active-1 .theme-1 {
   opacity: 1;
 }
+
+body.active-2 .theme-2 {
+  opacity: 1;
+}
+
+body.active-3 .theme-3 {
+  opacity: 1;
+}
+
+/* .buttons-bg button.active {
+  opacity: 1;
+} */
 
 #result {
   width: 100%;
